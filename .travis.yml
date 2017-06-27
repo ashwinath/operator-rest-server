@@ -3,6 +3,11 @@ node_js: 8.1.2
 services:
 - redis-server
 before_script:
- - git clone https://github.com/ashwinath/operator-batch batch && cd batch && yarn && yarn test && cd ..
+- git clone https://github.com/ashwinath/operator-batch batch && cd batch && yarn
+  && yarn test && cd ..
 after_success:
 - yarn coverage
+env:
+  global:
+  - secure: nIP49zxgHNaGfC/gs7g0jA+f8ApirD5Yaol6sWCcTv67nZixuwOIUcBvNRP8+OimIE/X6LRF3dEGvGnatYVygm9tgVtNdur2Y6mHb2NeLaxWS+bNi3TYDJSzB52s1SYfhbref9sc9eTdCzKNCvMbbC8H8XwSbwWvdqZMV8DeunuK+JqulAn3jYhVeQ0Q68S8m2lk7iN173UROv3PkOJm0+NKZCSuwPbt0ERQ36RcubAULFQV0c5QDcrzOs2EMcZJOQJy2T4cBQo89CjFVkgzcWQa+SkNkDRYvWZ6AHAHBfXfKdyFGzVxF2gRDviPmFAg8fO99EeUGYo4Cs3UXS+WBYzTB6GtCUWHQtJ+DZBA2roMzHIeyo+UJWf9Q4q3vQSmJgfNm7omuNzb0wwJm+K56yXt/lgxtDwaTPfu8d5PXh1eNHRWxXz8mUng+kw4CBDk9eidmOCNu+m0lm54sDMDJv//9pXJ3Y27JQPZ3hrzx+GQokIeKBFT0O1HFmhdFX7Ar2gP3/kcOuhMyOFV9C6tBzcXiKFGlLroxN77qMb+H5tHI5qVYLRqK5jRlqXAN8IxtIG6ujTfAljbqSA++HIF7VRWUP0d5MSvoYT6pDOsVEPglyCpML6ps5kHRwZ7TScgYwMHWKGD9ESYczbdCBXPlqUYlMrxzus5a+bQPDJ0ae8=
+  - secure: MOQJ6dlEXJWJXiO4bvV143nYhqqzchL8S3XhmrhA1qyIPCyqVMUY3GOu32L68Q/HQFnaKUSVT51HKkIRHgfkT4bIN+z01nl/p7cnpEDw/c7j5/c0+/a/YLvwYytjk3rvANlufX9RI/KQWYCMSKyh3gWnB8Ngy9byhmAHjciBUK+0w3ul8ltFHFYLlWWdhVgejWnEU47QguF82Qtxv4asxEAZQDTeIjk/W8YIeQUHxnWJ7qKSypWgOBA2InzDJqDmazfXg1fdXcUtcqz6BCNhrMDnDitEvwxooA10nvWbQsJzosm1TDTmIsORopL2To6PmZZl+Gq6am78SsNMcKdr5/eYUOhJ6Q8K9mPUEJ5vQlBXOkEUs4AQKwxUL4Di827HecKPP4/5i7JNuG/EIzxLWyP8hlrBopUczgNQrsEyUhMa8Qd8PtBf0vbnuPjlh4OL9uxlB+HHZaXXcGHtZiRmUA8+/QDry5YiGZFxufOX3z3+2hInkrzFSoUwo+3NCgf8Q52vOtBZ/QiqAy5wZ6aVVOivGkQpz7JGs6a1hRQDgF8b+/lwHQOiHFKehvYcqi7FfNlyqnEufH8RYZjFqTxyyDV9E43W7NFWA90amSSzzjKHduNmwj4yldvbk9Q4tKYGo5BT4TJ1ieF80LxWWvNYj/LyiPV/969Uv1NMrnCLtFg=
