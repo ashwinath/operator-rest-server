@@ -3,8 +3,7 @@ node_js: 8.1.2
 services:
 - redis-server
 before_script:
-- git clone https://github.com/ashwinath/operator-batch batch && cd batch && yarn
-  && yarn test && cd ..
+- . /scripts/pre-test.sh
 after_success:
 - yarn coverage
 env:
