@@ -3,7 +3,7 @@ node_js: 8.1.2
 services:
 - redis-server
 before_script:
-- . /scripts/pre-test.sh
+- bash scripts/pre-test.sh
 after_success:
 - yarn coverage
 env:

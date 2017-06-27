@@ -1,4 +1,5 @@
-cdir = $(pwd);
+#!/bin/bash
+cdir=$(pwd);
 cd;
 git clone https://github.com/ashwinath/operator-batch batch;
 cd batch;
