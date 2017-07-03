@@ -3,6 +3,10 @@ const redis = require('../Redis/RedisSession'),
       logger = require('../Winston/WinstonSession'),
       _ = require('lodash');
 
+function addNewsSource(source, callback) {
+  redis.SADD('News:SOURCES', source, callback);
+}
+
 function getNewsSources() {
   return redis.sortAsync("News:SOURCES", "ALPHA");
 }
@@ -27,6 +31,7 @@ function getNews(source, callback, errorCallback) {
 
 const NewsManager = {
   getNews: getNews,
-  getNewsSources: getNewsSources
+  getNewsSources: getNewsSources,
+  addNewsSource: addNewsSource
 }
 module.exports = NewsManager;

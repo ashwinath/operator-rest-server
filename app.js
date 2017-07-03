@@ -2,9 +2,11 @@ const express = require('express'),
       app = express(),
       WeatherManager = require('./Managers/WeatherManager'),
       NewsManager = require('./Managers/NewsManager'),
+      bodyParser = require('body-parser')
       logger = require('./Winston/WinstonSession');
 
 const PORT = 8080;
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -45,6 +47,23 @@ app.get('/news/:source', (req, res, next) => {
     res.json({error: "No such news source stored."});
   });
 })
+
+app.post('/news/sources', (req, res, next) => {
+  const source = req.body.source;
+  logger.info(`Request to add ${source} into DB.`);
+  if (source) {
+    NewsManager.addNewsSource(req.body.source, (err, result) => {
+      if (err) {
+        logger.error("error persisting", err);
+        res.json({status: "error persisting"});
+      } else {
+        res.json({status: "success"});
+      }
+    });
+  } else {
+    res.json({status: "error, empty post"});
+  }
+});
 
 const listener = app.listen(PORT, () => {
   logger.info(`Operator Rest Server is listening on port ${PORT}`);

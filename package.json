@@ -8,6 +8,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "lodash": "^4.17.4",
     "redis": "^2.7.1",
