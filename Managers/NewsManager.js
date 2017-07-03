@@ -3,48 +3,30 @@ const redis = require('../Redis/RedisSession'),
       logger = require('../Winston/WinstonSession'),
       _ = require('lodash');
 
-const NEWS_SOURCE = [
-  'bbc-news',
-  'bloomberg',
-  'business-insider',
-  'reuters',
-  'techcrunch'
-];
+function getNewsSources() {
+  return redis.sortAsync("News:SOURCES", "ALPHA");
+}
 
-function getAllNews(callback) {
-  logger.info("Querying News.");
-  const queryAllCounter = NEWS_SOURCE.map(source => `News:${source}`)
-    .map(source => {
-      return redis.getAsync(`${source}:COUNTER`)
-    });
-  // all the counters here like ["1", "2", ...]
-  return bluebird.all(queryAllCounter)
-    .then(data => {
-      const redisNewsSources = NEWS_SOURCE.map(source => `News:${source}`)
-      let promises = [];
-      _.range(NEWS_SOURCE.length).forEach(iterator => {
-        const redisNewsSource = redisNewsSources[iterator];
-        const redisNewsSourceCounter = data[iterator];
-        _.range(redisNewsSourceCounter).forEach(counterNumber => {
-          const redisQueryString = `${redisNewsSource}:${counterNumber}`;
-          promises.push(redis.hgetallAsync(redisQueryString));
-        });
+function getNews(source, callback, errorCallback) {
+  redis.getAsync(`News:${source}:COUNTER`)
+    .then(counter => {
+      const redisMulti = redis.multi();
+      _.range(counter).forEach(iterator => {
+        redisMulti.hgetall(`News:${source}:${iterator}`);
+      })
+      redisMulti.exec((err, result) => {
+        if (err) {
+          errorCallback(err);
+        } else {
+          callback(result)
+        }
       });
-      bluebird.all(promises)
-        .then(data => {
-          data.sort((a, b) => {
-            return new Date(b.publishedAt) - new Date(a.publishedAt);
-          })
-          return data;
-        })
-        .then(callback)
-        .catch(err => {
-          logger.error("NewsManager hit an error", err);
-        })
-    });
+    })
+    .catch(errorCallback);
 }
 
 const NewsManager = {
-  getAllNews: getAllNews
+  getNews: getNews,
+  getNewsSources: getNewsSources
 }
 module.exports = NewsManager;

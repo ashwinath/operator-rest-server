@@ -9,9 +9,19 @@ afterAll(() => {
 
 describe('Weather tests', () => {
 
-  test('GET /weather should respond with json', done => {
+  test('GET /news/sources should respond with json', done => {
     request(app)
-      .get("/news")
+      .get("/news/sources")
+      .then(response => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toBeTruthy();
+        done();
+      });
+  });
+
+  test('GET /news/techcrunch should respond with 200', done => {
+    request(app)
+      .get("/news/techcrunch")
       .then(response => {
         expect(response.statusCode).toBe(200);
         expect(response.body).toBeTruthy();

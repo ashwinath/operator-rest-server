@@ -24,13 +24,27 @@ app.get('/weather', (req, res, next) => {
     })
 });
 
-app.get('/news', (req, res, next) => {
-  logger.info("News requested");
-  NewsManager
-    .getAllNews(data => {
-      res.json(data);
+app.get('/news/sources', (req, res, next) => {
+  logger.info("News sources requested");
+  NewsManager.getNewsSources()
+    .then(data => {
+      res.json({sources: data});
+    })
+    .catch(err => {
+      logger.error("NewsManager hit an error", err);
     });
-});
+})
+
+app.get('/news/:source', (req, res, next) => {
+  const source = req.params.source;
+  logger.info(`News from ${source} requested`);
+  NewsManager.getNews(source, result => {
+    res.json(result);
+  }, err => {
+    logger.error(err);
+    res.json({error: "No such news source stored."});
+  });
+})
 
 const listener = app.listen(PORT, () => {
   logger.info(`Operator Rest Server is listening on port ${PORT}`);
