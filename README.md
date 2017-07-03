@@ -4,6 +4,9 @@
 
 Server that is used to power the operator software.
 
+## Functionality
+Please refer to [Operator Batch](https://github.com/ashwinath/operator-batch) for the full functionality set and [Operator Front End](https://github.com/ashwinath/operator-front-end) for the UI.
+
 ## API
 * `/news/sources` gives the news sources available.
 * `/news/{source}` gives the top news for the news source.
