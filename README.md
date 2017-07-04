@@ -62,6 +62,7 @@ Special thanks to News API and OpenWeatherMap for making this possible.
 ## API From Rest Server
 Please see [Operator Front End](https://github.com/ashwinath/operator-front-end) for an example.
 
+* GET `/weather` gives the weather forecast for 14 days.
 * GET `/news/sources` gives the news sources available.
 * GET `/news/{source}` gives the top news for the news source.
 * POST `/news/sources` adds a news service to the server
