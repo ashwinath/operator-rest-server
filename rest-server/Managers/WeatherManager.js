@@ -1,6 +1,6 @@
-const redis = require('../Redis/RedisSession'),
+const redis = require('../../Redis/RedisSession'),
       bluebird = require('bluebird'),
-      logger = require('../Winston/WinstonSession'),
+      logger = require('../../Winston/WinstonSession'),
       _ = require('lodash');
 
 function getWeather() {

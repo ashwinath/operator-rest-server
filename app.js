@@ -1,9 +1,10 @@
 const express = require('express'),
       app = express(),
-      WeatherManager = require('./Managers/WeatherManager'),
-      NewsManager = require('./Managers/NewsManager'),
+      WeatherManager = require('./rest-server/Managers/WeatherManager'),
+      NewsManager = require('./rest-server/Managers/NewsManager'),
       bodyParser = require('body-parser')
-      logger = require('./Winston/WinstonSession');
+      logger = require('./Winston/WinstonSession'),
+      batchServer = require('./batch/batch-process');
 
 const PORT = 8080;
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -68,6 +69,11 @@ app.post('/news/sources', (req, res, next) => {
 const listener = app.listen(PORT, () => {
   logger.info(`Operator Rest Server is listening on port ${PORT}`);
 });
+
+/**
+ * Start batch server
+ */
+batchServer();
 
 module.exports = {
   app: app,
