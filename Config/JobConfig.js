@@ -5,5 +5,6 @@ module.exports = {
   },
   news: {
     cron: "*/15 * * * *"
-  }
+  },
+  batchSwitch: false
 }
