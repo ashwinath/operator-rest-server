@@ -1,4 +1,4 @@
-const downloadNews = require('../batch/Services/NewsServices'),
+const {downloadNews} = require('../batch/Services/NewsServices'),
       redis = require('../Redis/RedisSession'),
       NewsContract = require('../batch/Contracts/NewsContract');
 
