@@ -5,9 +5,9 @@ const schedule = require('node-schedule'),
       JobConfig = require('../Config/JobConfig'),
       logger = require('../Winston/WinstonSession');
 
-logger.info("Operator Batch has started.");
 
 function startBatch() {
+  logger.info("Operator Batch has started.");
   /**
    * Weather Job
    */
