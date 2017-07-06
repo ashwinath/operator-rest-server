@@ -15,13 +15,13 @@ function downloadNews(callback) {
       logger.error("Error getting news sources from db" , err);
     } else {
       results.forEach(source => {
-        downloadNewsfromOneSource(source, callback);
+        downloadNewsFromOneSource(source, callback);
       });
     }
   });
 }
 
-function downloadNewsfromOneSource(source, callback) {
+function downloadNewsFromOneSource(source, callback) {
   logger.info(`Downloading news source from ${source}`);
   const queryString = genQueryString(source);
   axios.get(queryString)
@@ -69,4 +69,7 @@ function persist(articles, source) {
   });
 }
 
-module.exports = downloadNews;
+module.exports = {
+  downloadNews: downloadNews,
+  downloadNewsFromOneSource: downloadNewsFromOneSource
+};

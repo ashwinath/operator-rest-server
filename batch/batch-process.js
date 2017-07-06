@@ -1,6 +1,6 @@
 const schedule = require('node-schedule'),
       downloadWeather = require('./Services/WeatherService'),
-      downloadNews = require('./Services/NewsServices'),
+      { downloadNews } = require('./Services/NewsServices'),
       NewsContract = require('./Contracts/NewsContract'),
       JobConfig = require('../Config/JobConfig'),
       logger = require('../Winston/WinstonSession');

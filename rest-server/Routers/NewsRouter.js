@@ -1,6 +1,7 @@
 const express = require('express'),
       router = express.Router(),
       NewsManager = require('../Managers/NewsManager'),
+      { downloadNewsFromOneSource } = require('../../batch/Services/NewsServices'),
       logger = require('../../Winston/WinstonSession');
 
 router.get('/sources', (req, res, next) => {
@@ -34,6 +35,7 @@ router.post('/sources', (req, res, next) => {
         logger.error("error persisting", err);
         res.json({status: "error persisting"});
       } else {
+        downloadNewsFromOneSource(req.body.source);
         res.json({status: "success"});
       }
     });
