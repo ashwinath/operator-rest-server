@@ -35,7 +35,8 @@
       "/Winston/",
       "/Redis/",
       "/Config/",
-      "app.js"
+      "app.js",
+      "/batch/batch-process.js"
     ],
     "testEnvironment": "node",
     "coverageDirectory": "./coverage/",
